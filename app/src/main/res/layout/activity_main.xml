@@ -39,6 +39,7 @@
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
+            android:inputType="textPassword"
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
@@ -51,7 +52,7 @@
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_marginLeft="100dp"
-            android:id="@+id/submit"
+            android:id="@+id/login"
             android:text="Login"/>
     </LinearLayout>
     <LinearLayout
