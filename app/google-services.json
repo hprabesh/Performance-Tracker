@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "156507218553",
+    "project_id": "performance-tracker-997f6",
+    "storage_bucket": "performance-tracker-997f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156507218553:android:f6f6fb2061b3d81ba76aa8",
+        "android_client_info": {
+          "package_name": "com.example.performance_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156507218553-do3br06062ssfa6rg1tfmnffvm77b9dt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9PbrCfKsPH5fRy6TaPnwcl3HXT-gqI4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156507218553-do3br06062ssfa6rg1tfmnffvm77b9dt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
