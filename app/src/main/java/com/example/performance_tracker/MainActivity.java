@@ -91,5 +91,15 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivityForResult(registrationPage, 100);
             }
         });
+
+        Button forgetPassword = findViewById(R.id.forgot_password);
+
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent forgetPasswordPage = new Intent(MainActivity.this, ForgetPassword.class);
+                MainActivity.this.startActivityForResult(forgetPasswordPage, 100);
+            }
+        });
     }
 }
