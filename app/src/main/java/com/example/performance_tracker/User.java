@@ -1,7 +1,14 @@
 package com.example.performance_tracker;
 
+import java.util.Hashtable;
+import java.util.List;
+
 public class User {
     public String firstName, lastName, emailAddress,phoneNumber, studentIdNumber;
+
+    private List<User> friends;
+    private Hashtable<String, String> classes;
+    private List<Task> taskLists;
 
     public User(){
 
