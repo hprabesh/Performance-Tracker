@@ -9,7 +9,8 @@ public class User {
     private List<User> friends;
     private Hashtable<String, String> classes;
     private List<Task> taskLists;
-
+    private List<Streak> streakHistory;
+    private Streak userStreaks;
     public User(){
 
     }
