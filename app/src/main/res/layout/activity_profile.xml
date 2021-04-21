@@ -7,22 +7,67 @@
     tools:context=".Profile">
 
     <TextView
+        android:id="@+id/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/log_out"
-        android:text="Welcome"
-        android:layout_marginTop="50dp"
-        android:textSize="40sp"
+        android:layout_marginTop="37dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Welcome To Performance Tracker"
         android:textAlignment="center"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-black"/>
+        android:layout_alignParentTop="true"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/log_out"
         android:text="Log Out"
         android:textStyle="bold"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentBottom="true"/>
 
+
+    <Button
+        android:id="@+id/graph"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/project"
+        android:layout_marginEnd="121dp"
+        android:text="Graph/ Chart"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/friends"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="121dp"
+        android:text="Add Friends"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/add_class"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Title"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="157dp"
+        android:text="Add Classes/Tasks"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/project"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Title"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="157dp"
+        android:text="Project"
+        android:textStyle="bold" />
 
 </RelativeLayout>
