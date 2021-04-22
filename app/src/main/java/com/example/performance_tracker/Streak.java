@@ -17,14 +17,10 @@ public class Streak {
         throw new AssertionError("Can't Create a Streak without the Date- Sorry!");
     }
     public Streak(String currentDate){
-        if (!this.lastUpdatedDate.toString().isEmpty()) {
             this.setLastUpdatedDate(currentDate);
             this.setHighPriorityStreak(0);
             this.setMediumPriorityStreak(0);
             this.setLowPriorityStreak(0);
-        } else {
-            throw new InstantiationError("Streak class has already been instantiated- use the available method");
-        }
     }
 
     public Streak (Streak previousStreak, String currentDate){
@@ -38,7 +34,7 @@ public class Streak {
         this.setHighPriorityStreak(0);
         this.setMediumPriorityStreak(0);
         this.setLowPriorityStreak(0);
-        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss", Locale.getDefault());
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss", Locale.getDefault());
         String currentDateStringFormat = currentDate.format(new Date());
         this.setLastUpdatedDate(currentDateStringFormat);
         warningFlag = false;
@@ -50,19 +46,19 @@ public class Streak {
 
     public void addHighStreak(){
         this.setHighPriorityStreak(3);
-        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss", Locale.getDefault());
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss", Locale.getDefault());
         String currentDateStringFormat = currentDate.format(new Date());
         this.setLastUpdatedDate(currentDateStringFormat);
     }
     public void addMediumStreak(){
         this.setMediumPriorityStreak(2);
-        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss", Locale.getDefault());
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss", Locale.getDefault());
         String currentDateStringFormat = currentDate.format(new Date());
         this.setLastUpdatedDate(currentDateStringFormat);
     }
     public void addLowStreak(){
         this.setLowPriorityStreak(1);
-        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss", Locale.getDefault());
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss", Locale.getDefault());
         String currentDateStringFormat = currentDate.format(new Date());
         this.setLastUpdatedDate(currentDateStringFormat);
     }

@@ -5,69 +5,129 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Profile">
-
-    <TextView
-        android:id="@+id/Title"
+    <RelativeLayout
+        android:id="@+id/header_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/log_out"
-        android:layout_marginTop="37dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Welcome To Performance Tracker"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/log_out"
+            android:layout_marginTop="15dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Performance Tracker"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+        <Button
+            android:id="@+id/log_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Log Out"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/first_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_bar"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="18sp"
         android:textAlignment="center"
-        android:layout_alignParentTop="true"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:text="Hi User!"
+        android:textStyle="bold"/>
 
-    <Button
-        android:id="@+id/log_out"
-        android:text="Log Out"
-        android:textStyle="bold"
-        android:layout_width="150dp"
+    <androidx.cardview.widget.CardView
+        xmlns:card_view = "http://schemas.android.com/apk/res-auto"
+        android:id="@+id/streaks_card"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:layout_below="@id/first_name"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="20dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardBackgroundColor="#e9ecef"
+        android:layout_centerHorizontal="true">
+        <RelativeLayout
+            android:id="@+id/streaks_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/streaks_name"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="18sp"
+                android:text="Streak Point:"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/streak"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:textAlignment="center"
+                android:layout_toRightOf="@id/streaks_name"
+                android:text="0"
+                android:textSize="65dp"/>
+            <TextView
+                android:id="@+id/view_full_streak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/streak"
+                android:text="View Streak History"
+                android:textAlignment="viewEnd"
+                android:textStyle="italic"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 
-    <Button
-        android:id="@+id/graph"
-        android:layout_width="150dp"
+    <RelativeLayout
+        android:id="@+id/footer_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/project"
-        android:layout_marginEnd="121dp"
-        android:text="Graph/ Chart"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/graph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Graph"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/friends"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="121dp"
-        android:text="Add Friends"
-        android:textStyle="bold" />
+        <Button
+            android:id="@+id/friends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/graph"
+            android:text="Friends"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/add_class"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Title"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="157dp"
-        android:text="Add Classes/Tasks"
-        android:textStyle="bold" />
+        <Button
+            android:id="@+id/add_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/friends"
+            android:text="Classes"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/project"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Title"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="157dp"
-        android:text="Project"
-        android:textStyle="bold" />
+        <Button
+            android:id="@+id/project"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/add_class"
+            android:text="Proj"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
 </RelativeLayout>
