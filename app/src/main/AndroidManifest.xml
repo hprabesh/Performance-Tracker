@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Performancetracker">
         <activity android:name=".AddProject"></activity>
-        <activity android:name=".addFriends" />
+        <activity android:name=".AddFriends" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".Profile" />
         <activity android:name=".Registration" />

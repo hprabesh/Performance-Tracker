@@ -14,7 +14,7 @@ public class Streak {
     static public boolean warningFlag = false;
 
     private Streak(){
-        throw new AssertionError("Can't Create a Streak without the Date- Sorry!");
+//        throw new AssertionError("Can't Create a Streak without the Date- Sorry!");
     }
     public Streak(String currentDate){
             this.setLastUpdatedDate(currentDate);
