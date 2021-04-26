@@ -7,4 +7,10 @@
     <string name="forgot_password">Forgot Password</string>
     <string name="registration">Registration</string>
     <string name="add_friends">Add Friends</string>
+    <string name="title_activity_add_task">AddTask</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>

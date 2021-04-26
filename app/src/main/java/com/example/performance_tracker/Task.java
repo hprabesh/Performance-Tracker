@@ -1,20 +1,24 @@
 package com.example.performance_tracker;
 
+
+
 public class Task {
+    public  String uuid;
     private  String taskName;
     private  String taskDueDate;
     private  Priority taskPriority;
     private  String classRelated;
     private  Boolean taskStatus;
     private Task(){
-        throw new AssertionError();
+//        throw new AssertionError();
     }
 
-    public Task(String taskName, String taskDueDate, Priority taskPriority){
-        this(taskName,taskDueDate, taskPriority, null);
+    public Task( String uuid, String taskName, String taskDueDate, Priority taskPriority){
+        this( uuid, taskName,taskDueDate, taskPriority, null);
     }
 
-    public Task(String taskName, String taskDueDate, Priority taskPriority, String classRelated){
+    public Task( String uuid, String taskName, String taskDueDate, Priority taskPriority, String classRelated){
+        this.uuid = uuid;
         this.setTaskName(taskName);
         this.setTaskDueDate(taskDueDate);
         this.setTaskPriority(taskPriority);

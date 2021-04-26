@@ -1,6 +1,7 @@
 package com.example.performance_tracker;
 
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
@@ -26,8 +27,9 @@ public class User {
 
     private List<User> friends;
     public HashMap<String,Streak> streakHistory;
+    public HashMap<String, HashMap<String,Task>> taskLists;
+    public Integer numberOfTasks;
     private Hashtable<String, String> classes;
-    private List<Task> taskLists;
 
     // All user variable goes in here
     private FirebaseUser loggedInUser;
@@ -43,6 +45,7 @@ public class User {
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
         this.studentIdNumber = studentIdNumber;
+        this.numberOfTasks = 0;
 
         SimpleDateFormat currentDate= new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss", Locale.getDefault());
         this.accountOpenedDate = currentDate.format(new Date());
