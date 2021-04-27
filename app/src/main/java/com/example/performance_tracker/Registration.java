@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Registration extends AppCompatActivity {
@@ -25,11 +26,11 @@ public class Registration extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -105,12 +106,16 @@ public class Registration extends AppCompatActivity {
                                             if (task.isSuccessful()){
                                                 Toast.makeText(getApplicationContext(), "User has been Registered Successfully",Toast.LENGTH_LONG).show();
                                             } else {
-                                                Toast.makeText(getApplicationContext(), "Registration Failed", Toast.LENGTH_LONG).show();
+                                                FirebaseAuthException e= (FirebaseAuthException) task.getException();
+                                                Toast.makeText(getApplicationContext(), "Registration Failed: "+e.getMessage(), Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     });
+
+
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "Registration Failed", Toast.LENGTH_LONG).show();
+                                    FirebaseAuthException e= (FirebaseAuthException) task.getException();
+                                    Toast.makeText(getApplicationContext(), "Registration Failed: "+e.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
