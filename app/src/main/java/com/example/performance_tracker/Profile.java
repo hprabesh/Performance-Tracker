@@ -7,10 +7,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -47,11 +52,19 @@ public class Profile extends AppCompatActivity {
     private String loggedInUserId;
 
 
+    // View user streak history
+    private TextView viewStreakHistory;
+    private PopupWindow popupWindow;
+    private LayoutInflater layoutInflater;
+    private RelativeLayout relativeLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+
+        // for populating the pending task field
         listview = (ListView) findViewById(R.id.task_list);
         listview.setScrollContainer(false);
 
@@ -74,7 +87,7 @@ public class Profile extends AppCompatActivity {
         listview.setAdapter(arrayAdapter);
 
 
-
+        // for the loggedInUser
 
         loggedInUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -104,7 +117,33 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        // for pop up User Streak
+        relativeLayout = (RelativeLayout) findViewById(R.id.streak_relative_layout);
+        viewStreakHistory = (TextView) findViewById(R.id.view_full_streak);
+        viewStreakHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                startActivity(new Intent(Profile.this, streak_history.class));
+//                layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+//                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.activity_streak_history,null);
+//
+//                popupWindow = new PopupWindow(container, TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.MATCH_PARENT, true);
+//                popupWindow.showAtLocation(relativeLayout, Gravity.TOP,0,0);
+//
+//                container.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View v, MotionEvent event) {
+//                        popupWindow.dismiss();
+//                        return true;
+//                    }
+//                });
+            }
+        });
+
+
+
+        // All footer goes in here
         // Adding New Project
         addProject =(Button) findViewById(R.id.open_project_activity);
         addProject.setOnClickListener(new View.OnClickListener() {
