@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ public class AddTask extends AppCompatActivity {
     private EditText newTask;
     private Spinner newTaskPriority;
     private Spinner newTaskClassRelated;
-    private CalendarView newTaskDeadline;
+    private DatePicker newTaskDeadline;
 
     // All user variables goes in here
     private FirebaseUser loggedInUser;
@@ -78,7 +79,8 @@ public class AddTask extends AppCompatActivity {
             // Yet to be implemented
 
         // Deadline
-        newTaskDeadline = (CalendarView) findViewById(R.id.new_task_deadline);
+        newTaskDeadline = (DatePicker) findViewById(R.id.new_task_deadline);
+//        newTaskDeadline.(false);
 
 
         // Add Task
@@ -90,16 +92,8 @@ public class AddTask extends AppCompatActivity {
                 Priority priorityLevel = Priority.valueOf(newTaskPriority.getSelectedItem().toString());
 
                 // Get Deadline
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                final String[] changedDate = new String[1];
-                newTaskDeadline.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-                    @Override
-                    public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                        changedDate[0] = String.valueOf(year).concat("-").concat(String.valueOf(month)).concat("-").concat(String.valueOf(dayOfMonth));
-                    }
-                });
 
-                String deadline = changedDate[0];
+                String deadline = String.valueOf(newTaskDeadline.getYear()).concat("-").concat(String.valueOf(newTaskDeadline.getMonth()+1)).concat("-").concat(String.valueOf(newTaskDeadline.getDayOfMonth()));
                 if (taskName.isEmpty()){
                     newTask.setError("Required task Name");
                     newTask.requestFocus();

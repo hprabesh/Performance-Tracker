@@ -52,13 +52,15 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp" />
 
-            <CalendarView
+            <DatePicker
                 android:id="@+id/new_task_deadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp" />
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:datePickerMode="spinner"
+                />
 
             <Button
                 android:id="@+id/add_new_task"

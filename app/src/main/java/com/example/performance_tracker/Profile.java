@@ -71,8 +71,33 @@ public class Profile extends AppCompatActivity {
 
         // Home-Screen Content
 
+
         final TextView firstNameTextView = (TextView) findViewById(R.id.first_name); // the first name
         final TextView streakPoints = (TextView) findViewById(R.id.streak);
+
+        // for the task list
+        // for populating the pending task field
+        listview = (ListView) findViewById(R.id.task_list);
+        listview.setScrollContainer(false);
+
+
+        String[] values = new String[] {
+                "April 26, 2021",
+                "   User Task 1       PRIORITY: High",
+                "   User Task 2       PRIORITY: Medium",
+                "   User Task 3       PRIORITY: Low",
+                "   User Task 4       PRIORITY: High",
+                "April 25, 2021",
+                "   User Task 1       PRIORITY: High",
+                "   User Task 2       PRIORITY: Low",
+                "   User Task 3       PRIORITY: High",
+                "   User Task 4       PRIORITY: High"}; // this should be the formatting for displaying the task
+
+
+        final ArrayList<String> list = new ArrayList<String>(Arrays.asList(values));
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        listview.setAdapter(arrayAdapter);
+
         reference.child(loggedInUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -119,28 +144,9 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        // for the task list
-        // for populating the pending task field
-        listview = (ListView) findViewById(R.id.task_list);
-        listview.setScrollContainer(false);
 
 
-        String[] values = new String[] {
-                "April 26, 2021",
-                "   User Task 1       PRIORITY: High",
-                "   User Task 2       PRIORITY: Medium",
-                "   User Task 3       PRIORITY: Low",
-                "   User Task 4       PRIORITY: High",
-                "April 25, 2021",
-                "   User Task 1       PRIORITY: High",
-                "   User Task 2       PRIORITY: Low",
-                "   User Task 3       PRIORITY: High",
-                "   User Task 4       PRIORITY: High"}; // this should be the formatting for displaying the task
 
-
-        final ArrayList<String> list = new ArrayList<String>(Arrays.asList(values));
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
-        listview.setAdapter(arrayAdapter);
 
 
 
