@@ -36,6 +36,8 @@ public class User {
     private DatabaseReference reference;
     private String loggedInUserId;
 
+
+
     public User(){
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
@@ -47,7 +49,7 @@ public class User {
         this.studentIdNumber = studentIdNumber;
         this.numberOfTasks = 0;
 
-        SimpleDateFormat currentDate= new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss", Locale.getDefault());
+        SimpleDateFormat currentDate= new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         this.accountOpenedDate = currentDate.format(new Date());
         this.userStreaks = new Streak(this.accountOpenedDate);
 
@@ -64,6 +66,6 @@ public class User {
         reference = FirebaseDatabase.getInstance().getReference("Users");
         loggedInUserId = loggedInUser.getUid();
         this.streakHistory.put(date, streak);
-        reference.child(loggedInUserId).child("StreakHistory").setValue(streakHistory);
+        reference.child(loggedInUserId).child("streakHistory").setValue(streakHistory);
     }
 }

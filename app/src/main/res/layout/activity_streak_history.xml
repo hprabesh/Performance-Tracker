@@ -164,13 +164,18 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/card_for_contents"
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp"
         app:cardUseCompatPadding="true"
         app:cardBackgroundColor="#e9ecef"
         android:layout_centerHorizontal="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Overall Performance History"
+            android:textAlignment="center"/>
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/streak_history_plot"
             android:layout_width="match_parent"

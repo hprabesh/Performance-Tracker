@@ -34,7 +34,7 @@ public class Streak {
         this.setHighPriorityStreak(0);
         this.setMediumPriorityStreak(0);
         this.setLowPriorityStreak(0);
-        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss", Locale.getDefault());
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String currentDateStringFormat = currentDate.format(new Date());
         this.setLastUpdatedDate(currentDateStringFormat);
         warningFlag = false;
@@ -46,19 +46,20 @@ public class Streak {
 
     public void addHighStreak(){
         this.setHighPriorityStreak(3);
-        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss", Locale.getDefault());
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String currentDateStringFormat = currentDate.format(new Date());
         this.setLastUpdatedDate(currentDateStringFormat);
     }
+
     public void addMediumStreak(){
         this.setMediumPriorityStreak(2);
-        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss", Locale.getDefault());
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String currentDateStringFormat = currentDate.format(new Date());
         this.setLastUpdatedDate(currentDateStringFormat);
     }
     public void addLowStreak(){
         this.setLowPriorityStreak(1);
-        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss", Locale.getDefault());
+        SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String currentDateStringFormat = currentDate.format(new Date());
         this.setLastUpdatedDate(currentDateStringFormat);
     }
@@ -75,7 +76,7 @@ public class Streak {
         return lowPriorityStreak;
     }
 
-    private void setLowPriorityStreak(Integer lowPriorityStreak) {
+    public void setLowPriorityStreak(Integer lowPriorityStreak) {
         this.lowPriorityStreak = lowPriorityStreak;
     }
 
@@ -83,7 +84,7 @@ public class Streak {
         return mediumPriorityStreak;
     }
 
-    private void setMediumPriorityStreak(Integer mediumPriorityStreak) {
+    public void setMediumPriorityStreak(Integer mediumPriorityStreak) {
         this.mediumPriorityStreak = mediumPriorityStreak;
     }
 
@@ -91,7 +92,7 @@ public class Streak {
         return highPriorityStreak;
     }
 
-    private void setHighPriorityStreak(Integer highPriorityStreak) {
+    public void setHighPriorityStreak(Integer highPriorityStreak) {
         this.highPriorityStreak = highPriorityStreak;
     }
 }

@@ -118,7 +118,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/streaks_card"
                 card_view:cardBackgroundColor="#e9ecef">
-
                         <LinearLayout
                             android:id="@+id/table_container"
                             android:layout_width="match_parent"
@@ -135,16 +134,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                             </ListView>
-
                         </LinearLayout>
-
-
-
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
-
-
-
     </ScrollView>
     <RelativeLayout
         android:id="@+id/footer_bar"

@@ -91,8 +91,15 @@ public class AddTask extends AppCompatActivity {
 
                 // Get Deadline
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String deadline = sdf.format(new Date(newTaskDeadline.getDate()));
+                final String[] changedDate = new String[1];
+                newTaskDeadline.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                    @Override
+                    public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                        changedDate[0] = String.valueOf(year).concat("-").concat(String.valueOf(month)).concat("-").concat(String.valueOf(dayOfMonth));
+                    }
+                });
 
+                String deadline = changedDate[0];
                 if (taskName.isEmpty()){
                     newTask.setError("Required task Name");
                     newTask.requestFocus();

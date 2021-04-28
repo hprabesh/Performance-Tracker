@@ -22,9 +22,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.utilities.Tree;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.TreeMap;
 
 public class Profile extends AppCompatActivity {
     // All Button Declaration Goes here
@@ -55,7 +62,64 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        // for the loggedInUser
 
+        loggedInUser = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+
+        loggedInUserId = loggedInUser.getUid();
+
+        // Home-Screen Content
+
+        final TextView firstNameTextView = (TextView) findViewById(R.id.first_name); // the first name
+        final TextView streakPoints = (TextView) findViewById(R.id.streak);
+        reference.child(loggedInUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile = snapshot.getValue(User.class);
+
+                if (userProfile!= null){
+                    String firstName = userProfile.firstName;
+                    firstNameTextView.setText("Hi "+firstName+"!");
+
+
+                    SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    String loggedInDate= currentDate.format(new Date());
+
+                    TreeMap<String, Streak> streakHistory = new TreeMap<>(userProfile.streakHistory);
+                    if (!streakHistory.containsKey(loggedInDate)){
+                        Streak newStreakAdded = new Streak(loggedInDate);
+                        newStreakAdded.setHighPriorityStreak(Objects.requireNonNull(streakHistory.lastEntry()).getValue().getHighPriorityStreak());
+                        newStreakAdded.setMediumPriorityStreak(Objects.requireNonNull(streakHistory.lastEntry()).getValue().getMediumPriorityStreak());
+                        newStreakAdded.setLowPriorityStreak(Objects.requireNonNull(streakHistory.lastEntry()).getValue().getLowPriorityStreak());
+                        streakHistory.put(loggedInDate,newStreakAdded);
+                        reference.child(loggedInUserId).child("streakHistory").setValue(streakHistory);
+                        reference.child(loggedInUserId).child("userStreaks").setValue(newStreakAdded);
+                    }
+                    String streakPoint = userProfile.userStreaks.totalStreak().toString();
+                    streakPoints.setText(streakPoint);
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Profile.this, "Error while accessing user account! Please retry", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // for pop up User Streak
+        relativeLayout = (RelativeLayout) findViewById(R.id.streak_relative_layout);
+        viewStreakHistory = (TextView) findViewById(R.id.view_full_streak);
+        viewStreakHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Profile.this, streak_history.class));
+            }
+        });
+
+        // for the task list
         // for populating the pending task field
         listview = (ListView) findViewById(R.id.task_list);
         listview.setScrollContainer(false);
@@ -77,61 +141,6 @@ public class Profile extends AppCompatActivity {
         final ArrayList<String> list = new ArrayList<String>(Arrays.asList(values));
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(arrayAdapter);
-
-
-        // for the loggedInUser
-
-        loggedInUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Users");
-
-        loggedInUserId = loggedInUser.getUid();
-
-        // Home-Screen Content
-
-        final TextView firstNameTextView = (TextView) findViewById(R.id.first_name); // the first name
-        final TextView streakPoints = (TextView) findViewById(R.id.streak);
-        reference.child(loggedInUserId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User userProfile = snapshot.getValue(User.class);
-
-                if (userProfile!= null){
-                    String firstName = userProfile.firstName;
-                    String streakPoint = userProfile.userStreaks.totalStreak().toString();
-                    firstNameTextView.setText("Hi "+firstName+"!");
-                    streakPoints.setText(streakPoint);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Profile.this, "Error while accessing user account! Please retry", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // for pop up User Streak
-        relativeLayout = (RelativeLayout) findViewById(R.id.streak_relative_layout);
-        viewStreakHistory = (TextView) findViewById(R.id.view_full_streak);
-        viewStreakHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(Profile.this, streak_history.class));
-//                layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-//                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.activity_streak_history,null);
-//
-//                popupWindow = new PopupWindow(container, TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.MATCH_PARENT, true);
-//                popupWindow.showAtLocation(relativeLayout, Gravity.TOP,0,0);
-//
-//                container.setOnTouchListener(new View.OnTouchListener() {
-//                    @Override
-//                    public boolean onTouch(View v, MotionEvent event) {
-//                        popupWindow.dismiss();
-//                        return true;
-//                    }
-//                });
-            }
-        });
 
 
 
