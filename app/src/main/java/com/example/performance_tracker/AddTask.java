@@ -92,8 +92,19 @@ public class AddTask extends AppCompatActivity {
                 Priority priorityLevel = Priority.valueOf(newTaskPriority.getSelectedItem().toString());
 
                 // Get Deadline
-
-                String deadline = String.valueOf(newTaskDeadline.getYear()).concat("-").concat(String.valueOf(newTaskDeadline.getMonth()+1)).concat("-").concat(String.valueOf(newTaskDeadline.getDayOfMonth()));
+                String month;
+                String day;
+                if ((newTaskDeadline.getMonth()+1)<10){
+                    month = "0".concat(String.valueOf(newTaskDeadline.getMonth()+1));
+                } else {
+                    month = String.valueOf(newTaskDeadline.getMonth()+1);
+                }
+                if ((newTaskDeadline.getDayOfMonth())<10){
+                    day = "0".concat(String.valueOf(newTaskDeadline.getDayOfMonth()));
+                } else {
+                    day = String.valueOf(newTaskDeadline.getDayOfMonth());
+                }
+                String deadline = String.valueOf(newTaskDeadline.getYear()).concat("-").concat(month).concat("-").concat(day);
                 if (taskName.isEmpty()){
                     newTask.setError("Required task Name");
                     newTask.requestFocus();

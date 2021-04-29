@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -7,13 +7,14 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
 	tools:context=".Profile"
+    android:background="@drawable/ic_homebg"
 	xmlns:tools="http://schemas.android.com/tools">
-
     <LinearLayout
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
                 android:gravity="center_horizontal"
                 android:fontFamily="sans-serif-black"
                 android:text="Performance Tracker"
+                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:textSize="24sp" />
             <Button
@@ -44,24 +46,19 @@
     </LinearLayout>
 
 
-	<ScrollView
-	android:layout_width="match_parent"
-	android:layout_height="0dp"
-    android:layout_weight="1" >
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header_bar"
             android:id="@+id/streak_relative_layout">
-
-
             <TextView
             android:id="@+id/first_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="15dp" android:textColor="@color/white"
             android:textSize="18sp"
             android:textAlignment="center"
             android:text="Hi User!"
@@ -112,38 +109,49 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                xmlns:card_view = "http://schemas.android.com/apk/res-auto"
                 android:id="@+id/task_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardCornerRadius="1dp"
+                app:cardElevation="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_below="@id/streaks_card"
-                card_view:cardBackgroundColor="#e9ecef">
+                app:cardBackgroundColor="#e9ecef">
                         <LinearLayout
                             android:id="@+id/table_container"
                             android:layout_width="match_parent"
-                            android:layout_height="400dp"
+                            android:layout_height="350dp"
                             android:orientation="vertical">
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Pending Tasks"
-                                android:textAlignment="center"
-                                android:textSize="20sp"/>
+                                android:text="Today's Task List"
+                                android:textSize="20sp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="10dp"/>
                             <ListView
                                 android:id="@+id/task_list"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                            </ListView>
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp"/>                      >
+
+                            <Button
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/view_more" />
                         </LinearLayout>
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
-    </ScrollView>
     <RelativeLayout
         android:id="@+id/footer_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
+        android:layout_below="@id/streak_relative_layout"
+        android:layout_alignParentBottom="true"
         android:gravity="center_horizontal|bottom">
         <Button
             android:id="@+id/open_friend_activity"
@@ -180,4 +188,4 @@
             android:text="Project"
             android:textStyle="bold" />
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

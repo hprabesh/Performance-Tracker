@@ -24,10 +24,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.core.utilities.Tree;
 
+import java.sql.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -43,6 +46,8 @@ public class Profile extends AppCompatActivity {
 
     // All Listview goes in here
     private ListView listview;
+    private ArrayList<String> values;
+    private ArrayAdapter<String> stringArrayAdapter;
 
     // All User Variables Goes in Here
     private FirebaseUser loggedInUser;
@@ -79,23 +84,8 @@ public class Profile extends AppCompatActivity {
         // for populating the pending task field
         listview = (ListView) findViewById(R.id.task_list);
         listview.setScrollContainer(false);
-
-
-        String[] values = new String[] {
-                "April 26, 2021",
-                "   User Task 1       PRIORITY: High",
-                "   User Task 2       PRIORITY: Medium",
-                "   User Task 3       PRIORITY: Low",
-                "   User Task 4       PRIORITY: High",
-                "April 25, 2021",
-                "   User Task 1       PRIORITY: High",
-                "   User Task 2       PRIORITY: Low",
-                "   User Task 3       PRIORITY: High",
-                "   User Task 4       PRIORITY: High"}; // this should be the formatting for displaying the task
-
-
-        final ArrayList<String> list = new ArrayList<String>(Arrays.asList(values));
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        this.values = new ArrayList<String>();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
         listview.setAdapter(arrayAdapter);
 
         reference.child(loggedInUserId).addValueEventListener(new ValueEventListener() {
@@ -106,7 +96,6 @@ public class Profile extends AppCompatActivity {
                 if (userProfile!= null){
                     String firstName = userProfile.firstName;
                     firstNameTextView.setText("Hi "+firstName+"!");
-
 
                     SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                     String loggedInDate= currentDate.format(new Date());
@@ -121,9 +110,28 @@ public class Profile extends AppCompatActivity {
                         reference.child(loggedInUserId).child("streakHistory").setValue(streakHistory);
                         reference.child(loggedInUserId).child("userStreaks").setValue(newStreakAdded);
                     }
+
+                    HashMap<String, Task> task = new HashMap<>();
+                    HashMap<String,HashMap<String, Task>> taskLists = userProfile.taskLists;
+                    TreeMap<String, HashMap<String, Task>> sortedTaskLists = new TreeMap<String, HashMap<String, Task>>(taskLists);
+
+                    if (taskLists.containsKey(loggedInDate)){
+                        arrayAdapter.clear();;
+                        task = taskLists.get(loggedInDate);
+                        int count = 0;
+                        assert task != null;
+                        for (Map.Entry<String, Task> set: task.entrySet()){
+                            values.add(set.getValue().getTaskName());
+                            count ++;
+                            if (count >4) break;
+                        }
+                        arrayAdapter.notifyDataSetChanged();
+                    }
+
+
+
                     String streakPoint = userProfile.userStreaks.totalStreak().toString();
                     streakPoints.setText(streakPoint);
-
 
                 }
             }
@@ -134,6 +142,11 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
+
+
+
+
         // for pop up User Streak
         relativeLayout = (RelativeLayout) findViewById(R.id.streak_relative_layout);
         viewStreakHistory = (TextView) findViewById(R.id.view_full_streak);
@@ -143,11 +156,6 @@ public class Profile extends AppCompatActivity {
                 startActivity(new Intent(Profile.this, streak_history.class));
             }
         });
-
-
-
-
-
 
 
         // All footer goes in here
@@ -199,6 +207,7 @@ public class Profile extends AppCompatActivity {
 
 
     }
+
 
 
 }
