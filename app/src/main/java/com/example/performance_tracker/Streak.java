@@ -5,11 +5,11 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Streak {
-    private Integer highPriorityStreak;
-    private Integer mediumPriorityStreak;
-    private Integer lowPriorityStreak;
-    private String lastUpdatedDate;
-    private Integer pastTotalStreak;
+    public Integer highPriorityStreak;
+    public Integer mediumPriorityStreak;
+    public Integer lowPriorityStreak;
+    public String lastUpdatedDate;
+    public Integer pastTotalStreak;
 
     static public boolean warningFlag = false;
 

@@ -3,8 +3,10 @@ package com.example.performance_tracker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.RenderScript;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -49,7 +51,7 @@ public class MarkCompleteTask extends AppCompatActivity {
     // Received User Task Id
     private String taskId;
     private String taskDate;
-    private TreeMap<String, Streak> streakHistory;
+    private HashMap<String, Streak> streakHistory;
     private HashMap<String,HashMap<String, Task>> taskContent;
     private Task task;
 
@@ -79,34 +81,36 @@ public class MarkCompleteTask extends AppCompatActivity {
             taskId = bundle.getString("taskId");
             taskDate = bundle.getString("taskDate");
         }
-        reference.child(loggedInUserId).addValueEventListener(new ValueEventListener() {
+        reference.child(loggedInUserId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User userProfile = snapshot.getValue(User.class);
                 if (userProfile!=null){
+                    if (userProfile.taskLists!=null) {
+                        taskContent = userProfile.taskLists;
+                        task = taskContent.get(taskDate).get(taskId);
+                        if (task!=null) {
+                            String taskNameCollect = task.getTaskName();
+                            String taskDeadlineDateCollect = task.getTaskDueDate();
 
-                    taskContent = userProfile.taskLists;
-                    task = taskContent.get(taskDate).get(taskId);
+                            String taskPriorityCollect;
+                            if (task.getTaskPriority() == Priority.HIGH) {
+                                taskPriorityCollect = "High";
+                            } else if (task.getTaskPriority() == Priority.MEDIUM) {
+                                taskPriorityCollect = "Medium";
+                            } else {
+                                taskPriorityCollect = "Low";
+                            }
 
-                    String taskNameCollect = task.getTaskName();
-                    String taskDeadlineDateCollect = task.getTaskDueDate();
-
-                    String taskPriorityCollect;
-                    if (task.getTaskPriority()== Priority.HIGH){
-                        taskPriorityCollect= "High";
-                    } else if (task.getTaskPriority()== Priority.MEDIUM){
-                        taskPriorityCollect= "Medium";
-                    } else {
-                        taskPriorityCollect = "Low";
-                    }
-
-                    String taskStatusCollect = (!task.getTaskStatus())?"Incomplete": "Completed";
-                    taskName.setText(taskNameCollect);
+                            String taskStatusCollect = (!task.getTaskStatus()) ? "Incomplete" : "Completed";
+                            taskName.setText(taskNameCollect);
 //                    taskName.setText(taskId);
-                    taskStatus.setText(taskStatusCollect);
+                            taskStatus.setText(taskStatusCollect);
 //                    taskStatus.setText(taskDate);
-                    taskDeadline.setText(taskDeadlineDateCollect);
-                    taskPriority.setText(taskPriorityCollect);
+                            taskDeadline.setText(taskDeadlineDateCollect);
+                            taskPriority.setText(taskPriorityCollect);
+                        }
+                    }
                 }
             }
 
@@ -119,36 +123,29 @@ public class MarkCompleteTask extends AppCompatActivity {
         markCompleted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reference.child(loggedInUserId).addValueEventListener(new ValueEventListener() {
+                reference.child(loggedInUserId).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         User userProfile = snapshot.getValue(User.class);
                         if (userProfile!=null){
 
-                            reference.child(loggedInUserId).child("taskLists").child(taskDate).child(taskId).removeValue();
+//                            reference.child(loggedInUserId).child("taskLists").setValue(userProfile.taskLists.remove(taskDate).child);
                             SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                             String loggedInDate= currentDate.format(new Date());
-                            streakHistory = new TreeMap<>(userProfile.streakHistory);
-
-                            if (task.getTaskPriority()== Priority.HIGH){
-                                Streak updatedStreak = streakHistory.get(loggedInDate);
-                                assert updatedStreak != null;
-                                updatedStreak.addHighStreak();
-                                streakHistory.put(loggedInDate, updatedStreak);
-
-                            } else if (task.getTaskPriority()== Priority.MEDIUM){
-                                Streak updatedStreak = streakHistory.get(loggedInDate);
-                                assert updatedStreak != null;
-                                updatedStreak.addMediumStreak();
-                                streakHistory.put(loggedInDate, updatedStreak);
-                            } else {
-                                Streak updatedStreak = streakHistory.get(loggedInDate);
-                                assert updatedStreak != null;
-                                updatedStreak.addLowStreak();
-                                streakHistory.put(loggedInDate, updatedStreak);
+                            HashMap<String, Streak> referenceStreak = userProfile.streakHistory;
+                            Streak updatedStreak = userProfile.streakHistory.get(loggedInDate);
+                            if (task.getTaskPriority()!=null && task!=null && updatedStreak!=null) {
+                                if (task.getTaskPriority() == Priority.HIGH) {
+                                    updatedStreak.highPriorityStreak += 3;
+                                } else if (task.getTaskPriority() == Priority.MEDIUM) {
+                                    updatedStreak.mediumPriorityStreak += 2;
+                                } else {
+                                    updatedStreak.lowPriorityStreak +=1;
+                                }
+                            referenceStreak.put(loggedInDate, updatedStreak);
+                            reference.child(loggedInUserId).child("streakHistory").setValue(referenceStreak);
                             }
-                            reference.child(loggedInUserId).child("streakHistory").setValue(streakHistory);
-
+                            reference.child(loggedInUserId).child("taskLists").child(taskDate).child(taskId).removeValue();
                         }
                     }
 
@@ -157,7 +154,11 @@ public class MarkCompleteTask extends AppCompatActivity {
                         Toast.makeText(MarkCompleteTask.this, "Error while accessing user task! Please retry", Toast.LENGTH_SHORT).show();
                     }
                 });
-
+                finish();
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
+//                startActivity(new Intent(MarkCompleteTask.this, RenderScript.Priority.class));
             }
         });
 

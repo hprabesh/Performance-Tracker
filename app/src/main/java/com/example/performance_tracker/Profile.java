@@ -100,7 +100,8 @@ public class Profile extends AppCompatActivity {
                 String loggedInDate= currentDate.format(new Date());
                 bundle.putString("taskDate", loggedInDate);
                 n.putExtras(bundle);
-                startActivity(n);
+                startActivityForResult(n,1);
+
             }
         });
 
@@ -125,25 +126,28 @@ public class Profile extends AppCompatActivity {
                         reference.child(loggedInUserId).child("streakHistory").setValue(streakHistory);
                         reference.child(loggedInUserId).child("userStreaks").setValue(newStreakAdded);
                     }
-
+                    reference.child(loggedInUserId).child("userStreaks").setValue(streakHistory.get(loggedInDate));
                     HashMap<String, Task> task = new HashMap<>();
-                    HashMap<String,HashMap<String, Task>> taskLists = userProfile.taskLists;
-                    TreeMap<String, HashMap<String, Task>> sortedTaskLists = new TreeMap<String, HashMap<String, Task>>(taskLists);
-
-                    if (taskLists.containsKey(loggedInDate)){
-                        arrayAdapter.clear();
-                        arrayAdapter2.clear();
-                        task = taskLists.get(loggedInDate);
-                        int count = 0;
-                        assert task != null;
-                        for (Map.Entry<String, Task> set: task.entrySet()){
-                            values.add(set.getValue().getTaskName());
-                            taskUid.add(set.getValue().uuid);
-                            count ++;
-                            if (count >4) break;
-                        }
-                        arrayAdapter.notifyDataSetChanged();
+                    if (userProfile.taskLists!=null){
+                        HashMap<String,HashMap<String, Task>> taskLists = userProfile.taskLists;
+                        TreeMap<String, HashMap<String, Task>> sortedTaskLists = new TreeMap<String, HashMap<String, Task>>(taskLists);
+                        if (taskLists.containsKey(loggedInDate)){
+                            arrayAdapter.clear();
+                            arrayAdapter2.clear();
+                            task = taskLists.get(loggedInDate);
+                            int count = 0;
+                            assert task != null;
+                            for (Map.Entry<String, Task> set: task.entrySet()){
+                                values.add(set.getValue().getTaskName());
+                                taskUid.add(set.getValue().uuid);
+                                count ++;
+                                if (count >4) break;
+                            }
+                            arrayAdapter.notifyDataSetChanged();
                     }
+
+                    }
+
                     String streakPoint = userProfile.userStreaks.totalStreak().toString();
                     streakPoints.setText(streakPoint);
 
@@ -219,6 +223,16 @@ public class Profile extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    protected  void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == 1 && resultCode==RESULT_OK){
+                finish();
+                overridePendingTransition(0,0);
+                startActivity(getIntent());
+                overridePendingTransition(0,0);
+        }
     }
 
 
