@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -47,14 +48,15 @@ public class Profile extends AppCompatActivity {
     // All Listview goes in here
     private ListView listview;
     private ArrayList<String> values;
-    private ArrayAdapter<String> stringArrayAdapter;
+    //test
+    private ArrayList<String> taskUid;
+    private SimpleDateFormat currentDate;
 
     // All User Variables Goes in Here
     private FirebaseUser loggedInUser;
     private DatabaseReference reference;
 
     private String loggedInUserId;
-
 
     // View user streak history
     private TextView viewStreakHistory;
@@ -68,14 +70,12 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         // for the loggedInUser
-
         loggedInUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
 
         loggedInUserId = loggedInUser.getUid();
 
         // Home-Screen Content
-
 
         final TextView firstNameTextView = (TextView) findViewById(R.id.first_name); // the first name
         final TextView streakPoints = (TextView) findViewById(R.id.streak);
@@ -85,19 +85,34 @@ public class Profile extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.task_list);
         listview.setScrollContainer(false);
         this.values = new ArrayList<String>();
+        this.taskUid = new ArrayList<String>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, taskUid);
         listview.setAdapter(arrayAdapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent n = new Intent(getApplicationContext(), MarkCompleteTask.class);
+                String taskId = taskUid.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("taskId", taskId);
+                currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                String loggedInDate= currentDate.format(new Date());
+                bundle.putString("taskDate", loggedInDate);
+                n.putExtras(bundle);
+                startActivity(n);
+            }
+        });
 
         reference.child(loggedInUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User userProfile = snapshot.getValue(User.class);
-
                 if (userProfile!= null){
                     String firstName = userProfile.firstName;
                     firstNameTextView.setText("Hi "+firstName+"!");
 
-                    SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                     String loggedInDate= currentDate.format(new Date());
 
                     TreeMap<String, Streak> streakHistory = new TreeMap<>(userProfile.streakHistory);
@@ -116,20 +131,19 @@ public class Profile extends AppCompatActivity {
                     TreeMap<String, HashMap<String, Task>> sortedTaskLists = new TreeMap<String, HashMap<String, Task>>(taskLists);
 
                     if (taskLists.containsKey(loggedInDate)){
-                        arrayAdapter.clear();;
+                        arrayAdapter.clear();
+                        arrayAdapter2.clear();
                         task = taskLists.get(loggedInDate);
                         int count = 0;
                         assert task != null;
                         for (Map.Entry<String, Task> set: task.entrySet()){
                             values.add(set.getValue().getTaskName());
+                            taskUid.add(set.getValue().uuid);
                             count ++;
                             if (count >4) break;
                         }
                         arrayAdapter.notifyDataSetChanged();
                     }
-
-
-
                     String streakPoint = userProfile.userStreaks.totalStreak().toString();
                     streakPoints.setText(streakPoint);
 
@@ -141,10 +155,6 @@ public class Profile extends AppCompatActivity {
                 Toast.makeText(Profile.this, "Error while accessing user account! Please retry", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
 
 
         // for pop up User Streak
@@ -168,6 +178,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
         // Adding New Friends
         addFriendButton =(Button) findViewById(R.id.open_friend_activity);
         addFriendButton.setOnClickListener(new View.OnClickListener() {
@@ -186,6 +197,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
         // Adding New Class
         addFriendButton =(Button) findViewById(R.id.open_add_class_activity);
         addFriendButton.setOnClickListener(new View.OnClickListener() {
@@ -194,6 +206,7 @@ public class Profile extends AppCompatActivity {
                 startActivity(new Intent(Profile.this, AddFriends.class));
             }
         });
+
 
         // LogOut the Session
         logOut =(Button) findViewById(R.id.log_out);

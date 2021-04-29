@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MarkCompleteTask">
+    <TextView
+        android:id="@+id/header_bar_complete_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mark your task Complete"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/task_name_to_be_completed"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_bar_complete_task"/>
+
+    <TextView
+        android:id="@+id/task_status_to_be_completed"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/task_name_to_be_completed"/>
+
+    <TextView
+        android:id="@+id/task_deadline_to_be_completed"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/task_status_to_be_completed"/>
+
+    <TextView
+        android:id="@+id/task_priority_to_be_completed"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/task_deadline_to_be_completed"/>
+
+    <ImageView
+        android:id="@+id/mark_task_completed"
+        android:layout_width="43dp"
+        android:layout_height="47dp"
+        android:layout_below="@id/task_priority_to_be_completed"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/mark_completed" />
+
+
+
+</RelativeLayout>
