@@ -105,6 +105,7 @@ public class Registration extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()){
                                                 Toast.makeText(getApplicationContext(), "User has been Registered Successfully",Toast.LENGTH_LONG).show();
+                                                finish();
                                             } else {
                                                 FirebaseAuthException e= (FirebaseAuthException) task.getException();
                                                 Toast.makeText(getApplicationContext(), "Registration Failed: "+e.getMessage(), Toast.LENGTH_LONG).show();
