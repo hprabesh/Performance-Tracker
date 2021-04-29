@@ -193,8 +193,8 @@ public class Profile extends AppCompatActivity {
         });
 
         // Adding New Task
-        addFriendButton =(Button) findViewById(R.id.open_task_activity);
-        addFriendButton.setOnClickListener(new View.OnClickListener() {
+        addTaskButton =(Button) findViewById(R.id.open_task_activity);
+        addTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Profile.this, AddTask.class));
@@ -203,11 +203,11 @@ public class Profile extends AppCompatActivity {
 
 
         // Adding New Class
-        addFriendButton =(Button) findViewById(R.id.open_add_class_activity);
-        addFriendButton.setOnClickListener(new View.OnClickListener() {
+        addClassButton =(Button) findViewById(R.id.open_add_class_activity);
+        addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, AddFriends.class));
+                startActivity(new Intent(Profile.this, AddClass.class));
             }
         });
 

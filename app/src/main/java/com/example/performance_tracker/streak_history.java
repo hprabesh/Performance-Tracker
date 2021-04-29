@@ -85,9 +85,9 @@ public class streak_history extends AppCompatActivity {
                     if (userStreak.getHighPriorityStreak()==0)
                         findViewById(R.id.fire_streak_sign_1).setVisibility(View.INVISIBLE);
                     if (userStreak.getMediumPriorityStreak()==0)
-                        findViewById(R.id.fire_streak_sign_1).setVisibility(View.INVISIBLE);
+                        findViewById(R.id.fire_streak_sign_2).setVisibility(View.INVISIBLE);
                     if (userStreak.getLowPriorityStreak()==0)
-                        findViewById(R.id.fire_streak_sign_1).setVisibility(View.INVISIBLE);
+                        findViewById(R.id.fire_streak_sign_3).setVisibility(View.INVISIBLE);
 
                     highPriorityStreakPoint.setText(highPriorStreakPoint);
                     mediumPriorityStreakPoint.setText(mediumPriorStreakPoint);

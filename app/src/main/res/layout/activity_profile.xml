@@ -153,29 +153,32 @@
         android:layout_below="@id/streak_relative_layout"
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal|bottom">
-        <Button
-            android:id="@+id/open_friend_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="Friends"
-            android:textStyle="bold" />
 
         <Button
             android:id="@+id/open_task_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@+id/open_friend_activity"
+            android:layout_alignParentStart="true"
             android:text="Task"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/open_friend_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/open_task_activity"
+            android:layout_marginLeft="5dp"
+            android:text="Friends"
+            android:textStyle="bold" />
+
+
 
         <Button
             android:id="@+id/open_add_class_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@id/open_task_activity"
+            android:layout_toRightOf="@id/open_friend_activity"
             android:text="Class"
             android:textStyle="bold" />
 
