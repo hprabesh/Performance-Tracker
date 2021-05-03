@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.core.utilities.Tree;
 
+import java.io.Serializable;
 import java.sql.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,24 +45,23 @@ public class Profile extends AppCompatActivity {
     private Button addClassButton;
     private Button addTaskButton;
     private Button addProject;
+    private Button viewMoreTask;
 
-    // All Listview goes in here
+    // All Listview goes in here for Task
     private ListView listview;
     private ArrayList<String> values;
-    //test
     private ArrayList<String> taskUid;
     private SimpleDateFormat currentDate;
+    private HashMap<String,HashMap<String, Task>> taskLists;
+    private ArrayAdapter<String> arrayAdapter, arrayAdapter2;
 
     // All User Variables Goes in Here
     private FirebaseUser loggedInUser;
     private DatabaseReference reference;
-
     private String loggedInUserId;
 
     // View user streak history
     private TextView viewStreakHistory;
-    private PopupWindow popupWindow;
-    private LayoutInflater layoutInflater;
     private RelativeLayout relativeLayout;
 
     @Override
@@ -86,8 +86,8 @@ public class Profile extends AppCompatActivity {
         listview.setScrollContainer(false);
         this.values = new ArrayList<String>();
         this.taskUid = new ArrayList<String>();
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
-        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, taskUid);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
+        arrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, taskUid);
         listview.setAdapter(arrayAdapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -101,7 +101,6 @@ public class Profile extends AppCompatActivity {
                 bundle.putString("taskDate", loggedInDate);
                 n.putExtras(bundle);
                 startActivityForResult(n,1);
-
             }
         });
 
@@ -128,8 +127,8 @@ public class Profile extends AppCompatActivity {
                     }
                     reference.child(loggedInUserId).child("userStreaks").setValue(streakHistory.get(loggedInDate));
                     HashMap<String, Task> task = new HashMap<>();
-                    if (userProfile.taskLists!=null){
-                        HashMap<String,HashMap<String, Task>> taskLists = userProfile.taskLists;
+                    if (snapshot.child("taskLists").exists()){
+                        taskLists = userProfile.taskLists;
                         TreeMap<String, HashMap<String, Task>> sortedTaskLists = new TreeMap<String, HashMap<String, Task>>(taskLists);
                         if (taskLists.containsKey(loggedInDate)){
                             arrayAdapter.clear();
@@ -143,11 +142,12 @@ public class Profile extends AppCompatActivity {
                                 count ++;
                                 if (count >4) break;
                             }
-                            arrayAdapter.notifyDataSetChanged();
+                        }
+                    } else {
+                        taskLists=null;
+                        arrayAdapter.clear();
                     }
-
-                    }
-
+                    arrayAdapter.notifyDataSetChanged();
                     String streakPoint = userProfile.userStreaks.totalStreak().toString();
                     streakPoints.setText(streakPoint);
 
@@ -168,6 +168,21 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Profile.this, streak_history.class));
+            }
+        });
+
+        // for loading more tasks
+        viewMoreTask =  (Button) findViewById(R.id.view_more_task);
+        viewMoreTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (taskLists!=null){
+                    Intent intent = new Intent(Profile.this, LoadAllTasks.class);
+                    intent.putExtra("taskList",taskLists);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(Profile.this, "You don't have any tasks ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

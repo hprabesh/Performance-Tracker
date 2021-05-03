@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoadAllTasks">
+    <androidx.cardview.widget.CardView
+        xmlns:card_view = "http://schemas.android.com/apk/res-auto"
+        android:id="@+id/task_date_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="20dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardBackgroundColor="#e9ecef"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:id="@+id/first_day_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Hi There"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        xmlns:card_view = "http://schemas.android.com/apk/res-auto"
+        android:id="@+id/task_lists_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="1dp"
+        app:cardElevation="20dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_below="@id/task_date_header"
+        android:layout_above="@id/task_lists_footer"
+        card_view:cardBackgroundColor="#e9ecef"
+        android:layout_centerHorizontal="true">
+    <ListView
+            android:id="@+id/first_day_task_list"
+            android:layout_width="match_parent"
+            android:layout_below="@id/first_day_date"
+            android:layout_height="wrap_content"/>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/task_lists_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FF03DAC5">
+
+        <Button
+            android:id="@+id/next_task_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Next" />
+
+        <Button
+            android:id="@+id/previous_task_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Previous" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -45,13 +45,11 @@
 
     </LinearLayout>
 
-
-
-
-        <RelativeLayout
+     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/header_bar"
+            android:layout_above="@id/footer_bar"
             android:id="@+id/streak_relative_layout">
             <TextView
             android:id="@+id/first_name"
@@ -135,9 +133,10 @@
                                 android:id="@+id/task_list"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="20dp"/>                      >
+                                android:layout_marginBottom="20dp"/>
 
                             <Button
+                                android:id="@+id/view_more_task"
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:layout_gravity="center"
@@ -150,9 +149,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/streak_relative_layout"
         android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal|bottom">
+        android:gravity="center_horizontal|bottom"
+        android:background="#FF03DAC5">
 
         <Button
             android:id="@+id/open_task_activity"
@@ -170,8 +169,6 @@
             android:layout_marginLeft="5dp"
             android:text="Friends"
             android:textStyle="bold" />
-
-
 
         <Button
             android:id="@+id/open_add_class_activity"

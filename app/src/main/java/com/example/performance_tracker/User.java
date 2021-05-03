@@ -25,6 +25,8 @@ public class User {
     public String firstName, lastName, emailAddress,phoneNumber, studentIdNumber, accountOpenedDate;
     public Streak userStreaks;
 
+
+
     private List<User> friends;
     public HashMap<String,Streak> streakHistory;
     public HashMap<String, HashMap<String,Task>> taskLists;

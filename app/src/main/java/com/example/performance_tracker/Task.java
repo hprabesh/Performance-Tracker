@@ -1,8 +1,9 @@
 package com.example.performance_tracker;
 
 
+import java.io.Serializable;
 
-public class Task {
+public class Task implements Serializable {
     public  String uuid;
     private  String taskName;
     private  String taskDueDate;

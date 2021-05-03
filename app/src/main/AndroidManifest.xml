@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Performancetracker">
-        <activity android:name=".AddClass"></activity>
+        <activity android:name=".LoadAllTasks"></activity>
+        <activity android:name=".AddClass" />
         <activity android:name=".MarkCompleteTask" />
         <activity android:name=".streak_history" />
         <activity android:name=".AddTask" />
