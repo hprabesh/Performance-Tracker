@@ -9,7 +9,7 @@
         android:id="@+id/header_bar_complete_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mark your task Complete"
+        android:text="Mark the task Complete"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:textSize="20sp"

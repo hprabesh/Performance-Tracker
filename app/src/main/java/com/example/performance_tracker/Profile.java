@@ -47,6 +47,9 @@ public class Profile extends AppCompatActivity {
     private Button addProject;
     private Button viewMoreTask;
 
+    // For Friends
+    private HashMap<String,String> friendList;
+
     // All Listview goes in here for Task
     private ListView listview;
     private ArrayList<String> values;
@@ -110,6 +113,7 @@ public class Profile extends AppCompatActivity {
                 User userProfile = snapshot.getValue(User.class);
                 if (userProfile!= null){
                     String firstName = userProfile.firstName;
+                    friendList = userProfile.friends;
                     firstNameTextView.setText("Hi "+firstName+"!");
 
                     currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -203,7 +207,11 @@ public class Profile extends AppCompatActivity {
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Profile.this, AddFriends.class));
+                Intent intent = new Intent(Profile.this, AddFriends.class);
+                if (friendList!=null){
+                    intent.putExtra("friendsList", friendList);
+                }
+                startActivity(intent);
             }
         });
 

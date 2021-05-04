@@ -31,6 +31,7 @@ public class LoadAllTasks extends AppCompatActivity {
     private HashMap<String,HashMap<String, Task>> taskLists;
     private TreeMap<String, HashMap<String, Task>> sortedTaskLists;
     private HashMap<String, Task> task;
+    private ArrayAdapter<String> arrayAdapter, arrayAdapter2;
 
 
     // pointer to the task
@@ -39,7 +40,6 @@ public class LoadAllTasks extends AppCompatActivity {
     // Button
     private Button next;
     private Button previous;
-    private ArrayAdapter<String> arrayAdapter, arrayAdapter2;
 
     private void updateListView(Integer position){
 

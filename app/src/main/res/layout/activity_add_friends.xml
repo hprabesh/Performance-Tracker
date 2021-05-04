@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".AddFriends">
-    <LinearLayout
-        android:id="@+id/friends_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
         <TextView
-            android:id="@+id/find_friends_header"
+            android:id="@+id/add_new_friends_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -22,9 +16,10 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/find_friends_search"
+            android:id="@+id/enter_email_of_friends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/add_new_friends_header"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
@@ -33,12 +28,12 @@
             android:id="@+id/search_friends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/find_friends_search"
+            android:layout_below="@id/enter_email_of_friends"
             android:layout_marginLeft="10dp"
             android:text="Search"
             android:drawableEnd="@drawable/ic_iconmonstr_magnifier_4"/>
         <TextView
-            android:id="@+id/view_friends_header"
+            android:id="@+id/view_all_friends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/search_friends"
@@ -47,35 +42,40 @@
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />
-    </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_below="@id/view_friends_header"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/task_card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:cardCornerRadius="1dp"
+            app:cardElevation="10dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_below="@id/view_all_friends"
+            android:layout_above="@id/friends_footer_layer"
+            app:cardBackgroundColor="#e9ecef">
             <ListView
+                android:id="@+id/friends_list_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </ListView>
-        </RelativeLayout>
-    </ScrollView>
-    <RelativeLayout
-        android:id="@+id/friends_footer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+                android:layout_height="wrap_content"/>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/friends_footer_layer"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF03DAC5"
+        android:orientation="horizontal">
         <Button
             android:id="@+id/exit_friends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Main Menu"/>
-    </RelativeLayout>
+            android:text="Main Menu" />
+    </LinearLayout>
 
-
-</LinearLayout>
+</RelativeLayout>

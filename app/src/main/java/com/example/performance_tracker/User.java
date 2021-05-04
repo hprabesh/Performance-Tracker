@@ -24,10 +24,8 @@ import java.util.Map;
 public class User {
     public String firstName, lastName, emailAddress,phoneNumber, studentIdNumber, accountOpenedDate;
     public Streak userStreaks;
+    public HashMap<String,String> friends;
 
-
-
-    private List<User> friends;
     public HashMap<String,Streak> streakHistory;
     public HashMap<String, HashMap<String,Task>> taskLists;
     public Integer numberOfTasks;
@@ -59,6 +57,8 @@ public class User {
         this.streakHistory.put(accountOpenedDate,userStreaks);
 
         this.classes = new Hashtable<String, String>();
+
+        this.friends = new HashMap<String,String>();
 
     }
 
