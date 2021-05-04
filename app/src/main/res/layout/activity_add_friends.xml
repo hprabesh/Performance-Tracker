@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/search_friends"
             android:layout_marginTop="15dp"
-            android:text="Friends List"
+            android:text="Your friends List"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />

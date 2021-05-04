@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,7 +44,9 @@ public class AddFriends extends AppCompatActivity {
     // for populating the friendsList
     private ListView friendsList;
     private ArrayList<String> friendsName;
+    private ArrayList<String> friendsUid;
     private ArrayAdapter<String> arrayAdapter;
+    private ArrayAdapter<String> arrayAdapter2;
 
 
     @Override
@@ -64,19 +67,35 @@ public class AddFriends extends AppCompatActivity {
         // For getting the friendsList
         friendsList= (ListView) findViewById(R.id.friends_list_view);
         this.friendsName = new ArrayList<String >();
+        this.friendsUid = new ArrayList<String>();
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,friendsName);
+        arrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,friendsUid);
         friendsList.setAdapter(arrayAdapter);
+
+        friendsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent n = new Intent(getApplicationContext(), view_friend_streak.class);
+                n.putExtra("userId",friendsUid.get(position));
+                startActivity(n);
+            }
+        });
+
+
 
         Intent intent = getIntent();
         HashMap<String, String> friendsList = (HashMap<String, String>) intent.getSerializableExtra("friendsList");
 
         if (friendsList!=null){
-            for (String userFriend: friendsList.values()){
-                friendsName.add(userFriend);
+            for (Map.Entry<String,String>userFriend: friendsList.entrySet()){
+                friendsName.add(userFriend.getValue());
+                friendsUid.add(userFriend.getKey());
             }
             arrayAdapter.notifyDataSetChanged();
         }
+
+
 
 
 
@@ -98,7 +117,7 @@ public class AddFriends extends AppCompatActivity {
                         User userProfile = snapshots.child(loggedInUserId).getValue(User.class);
                         for (DataSnapshot snapShot: snapshots.getChildren()){
                             User user = snapShot.getValue(User.class);
-                            if (user.emailAddress.toLowerCase().equals(addFriendEmail.toLowerCase())){
+                            if (user.emailAddress.toLowerCase().equals(addFriendEmail.toLowerCase()) && !(user.emailAddress.toLowerCase().equals(userProfile.emailAddress.toLowerCase()))){
                                 Hashtable<String, String> friends = new Hashtable<String, String>();
                                 reference.child(snapShot.getKey()).child("friends").child(loggedInUserId).setValue(userProfile.firstName.concat(" ").concat(userProfile.lastName));
                                 reference.child(loggedInUserId).child("friends").child(snapShot.getKey()).setValue(user.firstName.concat(" ").concat(user.lastName));
