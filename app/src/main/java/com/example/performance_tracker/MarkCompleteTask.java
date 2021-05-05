@@ -37,6 +37,7 @@ public class MarkCompleteTask extends AppCompatActivity {
     private TextView taskPriority;
 
 
+    private Button goBack;
     // ImageView : Button
 
     private ImageView markCompleted;
@@ -67,6 +68,15 @@ public class MarkCompleteTask extends AppCompatActivity {
         taskPriority =(TextView) findViewById(R.id.task_priority_to_be_completed);
         //Button
         markCompleted = (ImageView) findViewById(R.id.mark_task_completed);
+
+        // Back Button
+        goBack = (Button) findViewById(R.id.exit_complete_task);
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         // for logged in user
         loggedInUser = FirebaseAuth.getInstance().getCurrentUser();

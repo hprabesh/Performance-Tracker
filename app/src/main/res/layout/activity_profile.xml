@@ -143,8 +143,8 @@
                                 android:background="@drawable/view_more" />
                         </LinearLayout>
             </androidx.cardview.widget.CardView>
-        </RelativeLayout>
-    <RelativeLayout
+     </RelativeLayout>
+     <RelativeLayout
         android:id="@+id/footer_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -187,5 +187,5 @@
             android:layout_toRightOf="@id/open_add_class_activity"
             android:text="Project"
             android:textStyle="bold" />
-    </RelativeLayout>
+     </RelativeLayout>
 </RelativeLayout>
