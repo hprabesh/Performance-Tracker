@@ -52,4 +52,19 @@
         android:text="Project Name"
         tools:layout_editor_absoluteX="172dp"
         tools:layout_editor_absoluteY="223dp" />
+
+    <LinearLayout
+        android:id="@+id/complete_project_footer"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF03DAC5"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/exit_project"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Main Menu"/>
+    </LinearLayout>
 </RelativeLayout>

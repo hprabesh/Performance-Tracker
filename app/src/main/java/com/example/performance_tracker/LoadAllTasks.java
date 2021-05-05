@@ -35,7 +35,7 @@ public class LoadAllTasks extends AppCompatActivity {
 
 
     // pointer to the task
-    private Integer position = 0;
+    private Integer positions = 0;
 
     // Button
     private Button next;
@@ -71,6 +71,7 @@ public class LoadAllTasks extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent n = new Intent(getApplicationContext(), MarkCompleteTask.class);
                 String taskId = taskUid.get(position);
+                positions = position;
                 Bundle bundle = new Bundle();
                 bundle.putString("taskId", taskId);
                 bundle.putString("taskDate", taskDateToBeCompleted);
@@ -94,16 +95,16 @@ public class LoadAllTasks extends AppCompatActivity {
 
         next = (Button) findViewById(R.id.next_task_view);
         previous = (Button) findViewById(R.id.previous_task_view);
-        updateListView(position);
+        updateListView(positions);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                position++;
-                if (position<(sortedTaskLists.size())){
-                    updateListView(position);
+                positions++;
+                if (positions<(sortedTaskLists.size())){
+                    updateListView(positions);
                 } else {
                     Toast.makeText(LoadAllTasks.this, "EOF reached", Toast.LENGTH_SHORT).show();
-                    position = 0;
+                    positions = 0;
                 }
             }
         });
@@ -111,9 +112,9 @@ public class LoadAllTasks extends AppCompatActivity {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                position--;
-                if (position>=0){
-                    updateListView(position);
+                positions--;
+                if (positions>=0){
+                    updateListView(positions);
                 } else {
                     finish();
                 }
@@ -126,9 +127,9 @@ public class LoadAllTasks extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 ){
             HashMap<String,Task> taskRemoved = sortedTaskLists.get(taskDateToBeCompleted);
-            taskRemoved.remove(taskUid.get(position));
+            taskRemoved.remove(taskUid.get(positions));
             sortedTaskLists.put(taskDateToBeCompleted,taskRemoved);
-            this.updateListView(position);
+            this.updateListView(positions);
         }
     }
 }
