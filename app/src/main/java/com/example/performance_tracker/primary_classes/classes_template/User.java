@@ -1,25 +1,15 @@
-package com.example.performance_tracker;
-
-import android.util.Log;
-import android.util.Pair;
-
-import androidx.annotation.NonNull;
+package classes_template;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public class User {
     public String firstName, lastName, emailAddress,phoneNumber, studentIdNumber, accountOpenedDate;
@@ -27,7 +17,7 @@ public class User {
     public HashMap<String,String> friends;
 
     public HashMap<String,Streak> streakHistory;
-    public HashMap<String, HashMap<String,Task>> taskLists;
+    public HashMap<String, HashMap<String, Task>> taskLists;
     public Integer numberOfTasks;
     private Hashtable<String, String> classes;
 

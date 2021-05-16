@@ -1,4 +1,4 @@
-package com.example.performance_tracker;
+package classes_template;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.example.performance_tracker;
+package classes_template;
 
 public enum Priority {
     HIGH (3),

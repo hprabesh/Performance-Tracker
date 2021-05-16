@@ -1,7 +1,10 @@
-package com.example.performance_tracker;
+package classes_template;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import classes_template.Task;
+import classes_template.User;
 
 public class Project {
     private String projectName;

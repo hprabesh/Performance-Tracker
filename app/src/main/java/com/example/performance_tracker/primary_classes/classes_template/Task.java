@@ -1,4 +1,4 @@
-package com.example.performance_tracker;
+package classes_template;
 
 
 import java.io.Serializable;
@@ -7,7 +7,7 @@ public class Task implements Serializable {
     public  String uuid;
     private  String taskName;
     private  String taskDueDate;
-    private  Priority taskPriority;
+    private Priority taskPriority;
     private  String classRelated;
     private  Boolean taskStatus;
     private Task(){

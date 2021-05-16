@@ -21,7 +21,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-
         <EditText
             android:id="@+id/find_class_search"
             android:layout_width="match_parent"

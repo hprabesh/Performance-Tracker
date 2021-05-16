@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.RenderScript;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,8 +24,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Objects;
-import java.util.TreeMap;
+
+import classes_template.Priority;
+import classes_template.Streak;
+import classes_template.Task;
+import classes_template.User;
 
 public class MarkCompleteTask extends AppCompatActivity {
 
