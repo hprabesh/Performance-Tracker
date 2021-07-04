@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+    android:id="@+id/usermenu"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+	tools:context=".Profile"
+    android:background="@drawable/ic_homebg"
+	xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:id="@+id/header_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/title"
+            android:text="Performance Tracker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_bar"
+        android:layout_above="@id/footer_bar"
+        android:layout_marginTop="15dp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         app:menu="@menu/bottom_navigation"
+         app:itemTextColor="@color/cardview_light_background"
+         android:background="?android:attr/windowBackground"
+         android:id="@+id/footer_bar"/>
+</RelativeLayout>

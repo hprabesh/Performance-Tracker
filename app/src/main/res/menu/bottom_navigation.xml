@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_home_page"
+        android:icon="@drawable/home"
+        android:title="Home"/>
+    <item
+        android:id="@+id/fragment_add_task_page"
+        android:icon="@drawable/task"
+        android:title="Add Task"/>
+    <item
+        android:id="@+id/fragment_add_class_page"
+        android:icon="@drawable/add_class_icon"
+        android:title="Add Class"/>
+</menu>
