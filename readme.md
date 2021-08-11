@@ -1,6 +1,6 @@
 <h1>Performance Tracker</h1>
 <p>
-    An Android Application to help improve students' productivity.
+    An android application using Java that enables the student to measure the daily performance level through the streak points by completing different priorities of tasks within a deadline. 
 </p>
 <hr/>
 <h2>Features</h2>
@@ -12,12 +12,26 @@
 </ul>
 <hr/>
 <h2>App Demo</h2>
+<a name="demo"></a>
 <img src="./Performance-Tracker-Demo.gif" alt="Short Demo"/>
 <hr/>
-<h2>Tools Used</h2>
+<h2>Programming Languages and Tools used</h2>
 <p>
-<strong>Programming Languages</strong>: Java<br/>
-<strong>Tools</strong>: Firebase, Canvas LMS REST API
+    <strong>Programming Languages</strong>: <ul><li>Java</li><li> XML</li></ul></p>
+<p>
+<strong>Tools</strong>
+    <ul>
+        <li>
+            Google Firebase Authentication was used to authenticate users
+        </li>
+        <li>
+            Google Firestore (NoSQL Database) was used to maintain the user records
+        </li>
+        <li>
+            Canvas LMS REST API was used to generate new tasks from the Class’ portal.
+        </li>
+   </ul>
+       
 </p>
 <hr/>
 <h2>Coding Structure</h2>
@@ -33,8 +47,14 @@ All Java Class name is in <strong>Pascal Case</strong>, whereas, all the variabl
 <h3>Step 1:</h3>
 <p>Clone this repository: git@github.com:hprabesh/android-performance-tracker.git</p>
 <h3>Step 2:</h3>
-<p>Set up the firebase account:<a href="https://firebase.google.com/docs/android/setup" target="_blank" title="Create Firebase Account">View this Google's Documentation on how to set Up firebase</a><br/><br/>
-In the firebase console, enable the firestore database, and add this in the <strong>Rule</strong> section:
+<p>Set up the firebase account: Follow Google's documentation on <a href="https://firebase.google.com/docs/android/setup" target="_blank" title="Create Firebase Account">how to set up firebase account</a></p>
+<p>
+In the firebase console, enable the firestore database, and set up the database rule on how users perform CRUD operation. </p>
+<p>
+    <em>This is the one that I used</em> 
+    </p>
+    <p>
+<strong>Rule</strong>:
 <pre>
  <code>
 rules_version = '2';
@@ -50,16 +70,15 @@ service cloud.firestore {
 </pre>
 </p>
 <h3>Step 3:</h3>
-<p>Please make sure that <a href="./app/google-services.json" title="Google Services JSON">/app/google-services.json</a> has been updated with the new keys. (<em>Please follow the google documentation on how to set up Firebase</em>)</p>
+<p>Please make sure that <a href="./app/google-services.json" title="Google Services JSON">/app/google-services.json</a> has been updated with the new keys.</p>
+<p>(<em>Please follow the google documentation on <a href="https://developers.google.com/android/guides/google-services-plugin" target="_blank" title="Google Services JSON DOCS"> how to set up google-services.json file</a></em>)</p>
 <hr/>
-<h2>How to Run the App<h2>
+<h2>How to use the App<h2>
 <h3>Login and Registration</h3>
-<p>Login and Registration is a straight forward process. Fill out the registration page and then you will receive a verification email to verify your account</p>
-<h3>Add Task, View Streak Points and Mark Task Completed</h3>
-<p>View the demo below on how to add tasks. </p>
-<h3>Add Class</h3>
-<p>Manually adding class is a straight forward process. View the demo</p>
-
-<p>Importing the classes from Canvas LMS requires you to generate API Key. So, please visit this site <a href="https://canvas.instructure.com/doc/api/file.oauth.html#manual-token-generation" title="Canvas" target="_blank">Canvas Manual Token Generation</a> on how to generate such token<br/> (<em>Please follow the Canvas Terms and Conditions about using OAuth2.0 and Manual API Token</em>). <br/><br/>Finally, copy that token, and click on <strong>Import Class from Canvas</strong> and paste it in the pop-up box, and then you can import the classes and assignments.  
+<p>Login and Registration is a straight forward process. Fill out the registration page and then you will receive a link for the verification in your email to verify the account</p>
+<h3>Add Task, Add Class View Streak Points and Mark Task Completed</h3>
+<p>Please view the <a href="#demo" title="Demo Gif">demo above</a> on how to add tasks, set priority, create deadline and all those good stuff. </p>
+<h3>Importing the classes and assignments from Canvas LMS</h3>
+<p>Importing the classes and assignments from Canvas LMS requires you to generate a new API Key. So, please visit this site <a href="https://canvas.instructure.com/doc/api/file.oauth.html#manual-token-generation" title="Canvas" target="_blank">Canvas Manual Token Generation</a> on how to generate token<br/> (<em>Please follow the Canvas Terms and Conditions about using OAuth2.0 and Manual API Token</em>). <br/><br/>Finally, copy that token, and click on <strong>Import Class from Canvas</strong> and paste it in the pop-up box, and then you can import the classes and assignments.  
 </p>
-
+<p><em>Please view the <a href="#demo" title="Demo Gif">demo above</a> to learn how to add the API Key</em></p>
