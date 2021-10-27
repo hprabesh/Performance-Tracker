@@ -82,3 +82,4 @@ service cloud.firestore {
 <p>Importing the classes and assignments from Canvas LMS requires you to generate a new API Key. So, please visit this site <a href="https://canvas.instructure.com/doc/api/file.oauth.html#manual-token-generation" title="Canvas" target="_blank">Canvas Manual Token Generation</a> on how to generate token<br/> (<em>Please follow the Canvas Terms and Conditions about using OAuth2.0 and Manual API Token</em>). <br/><br/>Finally, copy that token, and click on <strong>Import Class from Canvas</strong> and paste it in the pop-up box, and then you can import the classes and assignments.  
 </p>
 <p><em>Please view the <a href="#demo" title="Demo Gif">demo above</a> to learn how to add the API Key</em></p>
+   
